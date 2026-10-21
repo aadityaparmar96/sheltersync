@@ -60,5 +60,13 @@ def norm_label(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", s).strip("_")
 
 
+def sources() -> dict:
+    """Ordered {source_name: folder} for every sub-folder of RAW."""
+    found = [p.name for p in sorted(RAW.iterdir()) if p.is_dir()] if RAW.exists() else []
+    ordered = [s for s in SOURCE_PRIORITY if s in found] + [s for s in found if s not in SOURCE_PRIORITY]
+    return {s: RAW / s for s in ordered}
 
+
+def license_of(source: str) -> str:
+    return LICENSES.get(source, "UNKNOWN - CHECK")
 
