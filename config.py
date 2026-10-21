@@ -54,5 +54,11 @@ DUP_COSINE = 0.985
 
 SEED = 0
 
+def norm_label(name: str) -> str:
+    """'1_Fungal_Infections' -> 'fungal_infections'."""
+    s = re.sub(r"^\d+[_\-\s]*", "", name.lower())
+    return re.sub(r"[^a-z0-9]+", "_", s).strip("_")
+
+
 
 
