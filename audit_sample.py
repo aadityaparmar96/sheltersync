@@ -99,6 +99,18 @@ def cmd_apply(args):
           f"Original saved as {BACKUP.name}.")
     print("Caveat: a single reviewer. Report the sample size and say there is no inter-rater agreement.")
 
+def main():
+    ap = argparse.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    mk = sub.add_parser("make")
+    mk.add_argument("--n-per-class", type=int, default=60)
+    mk.add_argument("--splits", nargs="+", default=["test", "test_external"])
+    mk.add_argument("--per-sheet", type=int, default=24)
+    sub.add_parser("apply")
+    args = ap.parse_args()
+    cmd_make(args) if args.cmd == "make" else cmd_apply(args)
+
+
 
 
 
