@@ -110,7 +110,8 @@ def main():
     args = ap.parse_args()
     cmd_make(args) if args.cmd == "make" else cmd_apply(args)
 
-
+if __name__ == "__main__":
+    main()
 
 
 
