@@ -12,4 +12,12 @@ import pandas as pd
 
 import config as C
 
+def main():
+    df = pd.read_csv(C.WORK / "manifest_clustered.csv")
+    kept = df[df.keep & ~df.label_conflict]
+    by_source = {s: set(kept[kept.source == s].cluster_id) for s in df.source.unique()}
+
+    
+
+
 
