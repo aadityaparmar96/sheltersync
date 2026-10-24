@@ -17,6 +17,23 @@ def main():
     kept = df[df.keep & ~df.label_conflict]
     by_source = {s: set(kept[kept.source == s].cluster_id) for s in df.source.unique()}
 
+    rows = []
+    for s in sorted(df.source.unique()):
+            k = kept[kept.source == s]
+            cost = int(kept[kept.source != s].cluster_id.isin(by_source[s]).sum())
+            rows.append({
+                "source": s,
+                "raw": int((df.source == s).sum()),
+                "dup_copies_removed": int(((df.source == s) & ~df.keep).sum()),
+                "label_conflicts": int(((df.source == s) & df.label_conflict).sum()),
+                "kept": len(k),
+                "classes": k.mapped_label.nunique(),
+                "pct_overlapping_other_sources": round(100 * (k.cluster_n_sources > 1).mean(), 1) if len(k) else 0.0,
+                "train_images_lost_if_holdout": cost,
+            })
+    table = pd.DataFrame(rows).set_index("source")
+    
+
     
 
 

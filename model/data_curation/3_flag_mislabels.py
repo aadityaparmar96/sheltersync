@@ -1,4 +1,4 @@
-"""Step 3: flag images whose label looks wrong, so you can review them by hand.
+"""Step 3 of curation: flag images whose label looks wrong, so you can review them by hand.
 
 Idea: train a simple classifier on the image embeddings using cross-validation, where an
 image is NEVER predicted by a model that saw its own duplicate cluster. Images the model

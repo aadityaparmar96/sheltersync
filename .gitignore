@@ -1,1 +1,7 @@
-\data
+
+# Raw datasets
+/data/raw_datasets/
+/data/raw_datasets (ZIP versions)/
+
+# Label vocabulary
+/data/label_vocab/
