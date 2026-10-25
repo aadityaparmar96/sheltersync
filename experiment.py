@@ -1,4 +1,4 @@
-"""Runs the full experiment grid: cluster-safe vs random split, several seeds, then steps 6 and 7.
+"""Runs the full experiment grid
 
 Usage:
   python run_experiments.py                          # resnet50, 3 seeds, both split modes
@@ -36,8 +36,8 @@ def main():
             if args.no_pretrained:
                 cmd.append("--no-pretrained")
             run(*cmd)
-    run("06_calibrate_abstain.py", "--runs", *[f"runs/cluster_s{s}" for s in range(args.seeds)])
-    run("07_leakage_ablation.py")
+    run("", "--runs", *[f"runs/cluster_s{s}" for s in range(args.seeds)])
+    run("")
 
 
 if __name__ == "__main__":
