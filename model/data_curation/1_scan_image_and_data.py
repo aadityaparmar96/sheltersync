@@ -1,8 +1,8 @@
-"""Step 1: scan every source, validate images, map labels, write the metadata table.
+"""Step 1 for curation: scans every source, validates images, maps labels, writes the metadata table.
 
 Outputs (in data/work):
   manifest.csv   one row per usable image: path, source, license, labels, size, sha256
-  rejected.csv   images dropped and why (unreadable, too small, label dropped on purpose...)
+  rejected.csv   images dropped and why (unreadable, too small, label dropped on purpose etc.)
   unmapped.csv   class folders not in LABEL_MAP, with counts. Decide on these, then re-run.
 """
 import hashlib
@@ -10,11 +10,12 @@ import hashlib
 import pandas as pd
 from PIL import Image
 
+#TPU-5
 import config as C
 
 try:
     from tqdm import tqdm
-except ImportError:  # tqdm is optional
+except ImportError:  
     def tqdm(x, **_):
         return x
 
@@ -22,7 +23,7 @@ IMG_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
 
 def label_from_path(path, root):
-    """Nearest parent folder that is not a train/val/test folder."""
+    
     for part in reversed(path.relative_to(root).parent.parts):
         if part.lower() not in C.SPLIT_DIRS:
             return part
