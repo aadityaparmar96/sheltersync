@@ -10,7 +10,7 @@ import hashlib
 import pandas as pd
 from PIL import Image
 
-#TPU-5
+
 import config as C
 
 try:
